@@ -38,6 +38,13 @@ abstract class BaseController extends Controller
     protected $helpers = [];
 
     /**
+     * Database connection instance.
+     *
+     * @var \CodeIgniter\Database\BaseConnection
+     */
+    protected $db;
+
+    /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
@@ -50,6 +57,8 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+
+        $this->db = \Config\Database::connect();
 
         // Preload any models, libraries, etc, here.
 
