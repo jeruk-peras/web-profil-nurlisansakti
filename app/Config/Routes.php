@@ -15,6 +15,7 @@ $routes->group('api', function ($routes) {
 // render data
 $routes->group('render', function ($routes) {
     $routes->get('menu/(:num)', 'Serverside\RenderController::menu/$1');
+    $routes->get('slider', 'Serverside\RenderController::slider');
 });
 
 // datatables
@@ -38,5 +39,16 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/submenu', 'Administrator\MenuController::save/$1');
 
         $routes->post('(:num)/delete', 'Administrator\MenuController::delete/$1');
+    });
+
+    // slider routes
+    $routes->group('slider', function ($routes) {
+        $routes->get('/', 'Administrator\SliderController::index');
+        $routes->post('/', 'Administrator\SliderController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\SliderController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\SliderController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\SliderController::delete/$1');
     });
 });

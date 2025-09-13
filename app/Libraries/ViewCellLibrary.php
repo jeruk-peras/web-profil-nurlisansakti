@@ -27,8 +27,7 @@ class ViewCellLibrary extends BaseController
     public function slider(){
 
         $data = [
-            'menu' => $this->modelMenu->where('level', 1)->orderBy('order', 'ASC')->findAll(),
-            'submenu' => $this->modelMenu->where('level', 2)->orderBy('order', 'ASC')->findAll(),
+            'slider' => $this->db->table('slider')->get()->getResultArray()
         ];
 
         return view('viewcell/slider', $data);

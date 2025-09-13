@@ -45,6 +45,11 @@ abstract class BaseController extends Controller
     protected $db;
 
     /**
+     * Validation.
+     */
+    protected $validator;
+
+    /**
      * Be sure to declare properties for any property fetch you initialized.
      * The creation of dynamic property is deprecated in PHP 8.2.
      */
@@ -59,6 +64,7 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         $this->db = \Config\Database::connect();
+        $this->validator = \Config\Services::validation();
 
         // Preload any models, libraries, etc, here.
 

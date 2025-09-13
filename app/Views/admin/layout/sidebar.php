@@ -24,7 +24,7 @@
                 <div class="menu-title">Manajemen Menu</div>
             </a>
             <ul class="mm-collapse">
-                <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Data Menu</a></li>
+                <li><a href="<?= base_url('adm/menu'); ?>"><i class='bx bx-radio-circle'></i>Data Menu</a></li>
                 <li><a href="<?= base_url('material-mixing'); ?>"><i class='bx bx-radio-circle'></i>Data Halaman</a></li>
             </ul>
         </li>
@@ -42,7 +42,7 @@
                 <div class="menu-title">Web Konten</div>
             </a>
             <ul class="mm-collapse">
-                <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Slider</a></li>
+                <li><a href="<?= base_url('adm/slider'); ?>"><i class='bx bx-radio-circle'></i>Slider</a></li>
                 <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Bisnis Produk</a></li>
                 <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Partner</a></li>
                 <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>FAQ</a></li>
