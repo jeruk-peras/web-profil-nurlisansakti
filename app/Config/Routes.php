@@ -16,6 +16,7 @@ $routes->group('api', function ($routes) {
 $routes->group('render', function ($routes) {
     $routes->get('menu/(:num)', 'Serverside\RenderController::menu/$1');
     $routes->get('slider', 'Serverside\RenderController::slider');
+    $routes->get('service', 'Serverside\RenderController::service');
 });
 
 // datatables
@@ -50,5 +51,16 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\SliderController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\SliderController::delete/$1');
+    });
+
+    // Service routes
+    $routes->group('service', function ($routes) {
+        $routes->get('/', 'Administrator\ServiceController::index');
+        $routes->post('/', 'Administrator\ServiceController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\ServiceController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\ServiceController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\ServiceController::delete/$1');
     });
 });

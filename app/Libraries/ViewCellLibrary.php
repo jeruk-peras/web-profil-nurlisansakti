@@ -32,4 +32,13 @@ class ViewCellLibrary extends BaseController
 
         return view('viewcell/slider', $data);
     }
+
+    public function service(){
+
+        $data = [
+            'service' => $this->db->table('service')->get()->getResultArray()
+        ];
+
+        return view('viewcell/service', $data);
+    }
 }

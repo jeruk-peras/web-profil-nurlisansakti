@@ -64,85 +64,9 @@
         <!-- slider-area -->
         <?= view_cell('\App\Libraries\ViewCellLibrary::slider') ?>
         <!-- slider-area-end -->
-
+        
         <!-- service-area -->
-        <section class="service-details-two pb-90 p-relative">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col">
-                        <div class="services-box07 mb-30">
-
-                            <div class="sr-contner">
-                                <div class="icon">
-                                    <img src="img/icon/sve-icon4.png" alt="icon01">
-                                </div>
-                                <div class="text">
-                                    <h5>Free Delivery</h5>
-                                    <p>We have the best service for you to make and this is one the best service.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="services-box07 mb-30">
-
-                            <div class="sr-contner">
-                                <div class="icon">
-                                    <img src="img/icon/sve-icon4.png" alt="icon01">
-                                </div>
-                                <div class="text">
-                                    <h5>Free Delivery</h5>
-                                    <p>We have the best service for you to make and this is one the best service.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="services-box07 mb-30">
-
-                            <div class="sr-contner">
-                                <div class="icon">
-                                    <img src="img/icon/sve-icon4.png" alt="icon01">
-                                </div>
-                                <div class="text">
-                                    <h5>Free Delivery</h5>
-                                    <p>We have the best service for you to make and this is one the best service.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="services-box07 mb-30">
-                            <div class="sr-contner">
-                                <div class="icon">
-                                    <img src="img/icon/sve-icon5.png" alt="icon01">
-                                </div>
-                                <div class="text">
-                                    <h5>Moneyback Guarantee</h5>
-                                    <p>We have the best service for you to make and this is one the best service.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="services-box07 mb-30">
-                            <div class="sr-contner">
-                                <div class="icon">
-                                    <img src="img/icon/sve-icon6.png" alt="icon01">
-                                </div>
-                                <div class="text">
-                                    <h5>24/7 Online Support</h5>
-                                    <p>We have the best service for you to make and this is one the best service.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
+        <?= view_cell('\App\Libraries\ViewCellLibrary::service') ?>
         <!-- service-details2-area-end -->
 
         <!-- about-area -->
