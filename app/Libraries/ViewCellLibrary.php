@@ -74,4 +74,13 @@ class ViewCellLibrary extends BaseController
 
         return view('/viewcell/faq', $data);
     }
+
+     public function partner(){
+
+        $data = [
+            'partner' => $this->db->table('partner')->get()->getResultArray()
+        ];
+
+        return view('viewcell/partner', $data);
+    }
 }

@@ -30,6 +30,7 @@ $routes->group('render', function ($routes) {
     $routes->get('service', 'Serverside\RenderController::service');
     $routes->get('bisnis-produk', 'Serverside\RenderController::bisnis_produk');
     $routes->get('faq', 'Serverside\RenderController::faq');
+    $routes->get('partner', 'Serverside\RenderController::partner');
 });
 
 // datatables
@@ -101,5 +102,16 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\FAQController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\FAQController::delete/$1');
+    });
+
+    // Partner routes
+    $routes->group('partner', function ($routes) {
+        $routes->get('/', 'Administrator\PartnerController::index');
+        $routes->post('/', 'Administrator\PartnerController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\PartnerController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\PartnerController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\PartnerController::delete/$1');
     });
 });

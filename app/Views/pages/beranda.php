@@ -231,36 +231,6 @@
 <!-- faq-area-end -->
 
 <!-- brand-area -->
-<div class="brand-area pt-60 pb-60" style="background-color:#e81c2e">
-    <div class="container">
-        <div class="row brand-active">
-            <div class="col-xl-2">
-                <div class="single-brand">
-                    <img src="img/brand/b-logo1.png" alt="img">
-                </div>
-            </div>
-            <div class="col-xl-2">
-                <div class="single-brand">
-                    <img src="img/brand/b-logo2.png" alt="img">
-                </div>
-            </div>
-            <div class="col-xl-2">
-                <div class="single-brand">
-                    <img src="img/brand/b-logo3.png" alt="img">
-                </div>
-            </div>
-            <div class="col-xl-2">
-                <div class="single-brand">
-                    <img src="img/brand/b-logo4.png" alt="img">
-                </div>
-            </div>
-            <div class="col-xl-2">
-                <div class="single-brand">
-                    <img src="img/brand/b-logo5.png" alt="img">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<?= view_cell('\App\Libraries\ViewCellLibrary::partner') ?>
 <!-- brand-area-end -->
 <?= $this->endSection(); ?>
