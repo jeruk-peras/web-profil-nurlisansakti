@@ -1,6 +1,6 @@
 <?php foreach ($bisnis_produk as $row): ?>
     <div class="col">
-        <div class="card border-primary border-bottom border-3 border-0">
+        <div class="card">
             <img src="/images/bisnis_produk/<?= $row['gambar']; ?>" class="card-img" alt="Image" loading="lazy">
             <div class="card-body">
                 <h5 class="card-title"><?= $row['bisnis_produk']; ?></h5>
