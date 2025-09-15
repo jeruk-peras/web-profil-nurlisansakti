@@ -10,8 +10,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->group('/', function ($routes) {
     $routes->get('', 'PagesController::beranda');
     $routes->get('/beranda', 'PagesController::beranda');
+
     $routes->get('/bisnis-produk', 'PagesController::bisnis_produk');
     $routes->get('/bisnis-produk/(:any)', 'PagesController::bisnis_produk/$1');
+
+    $routes->get('/faq', 'PagesController::faq');
 });
 
 // api
@@ -26,6 +29,7 @@ $routes->group('render', function ($routes) {
     $routes->get('slider', 'Serverside\RenderController::slider');
     $routes->get('service', 'Serverside\RenderController::service');
     $routes->get('bisnis-produk', 'Serverside\RenderController::bisnis_produk');
+    $routes->get('faq', 'Serverside\RenderController::faq');
 });
 
 // datatables
@@ -73,7 +77,7 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/delete', 'Administrator\ServiceController::delete/$1');
     });
 
-      // bisnis routes
+    // bisnis routes
     $routes->group('bisnis-produk', function ($routes) {
         $routes->get('/', 'Administrator\BisnisprodukController::index');
         
@@ -84,5 +88,18 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\BisnisprodukController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\BisnisprodukController::delete/$1');
+    });
+
+    // faq routes
+    $routes->group('faq', function ($routes) {
+        $routes->get('/', 'Administrator\FAQController::index');
+        $routes->post('/', 'Administrator\FAQController::save');
+        
+        $routes->get('add', 'Administrator\FAQController::add');
+        
+        $routes->get('(:num)/edit', 'Administrator\FAQController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\FAQController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\FAQController::delete/$1');
     });
 });

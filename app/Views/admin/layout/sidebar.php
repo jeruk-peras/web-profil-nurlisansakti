@@ -46,7 +46,7 @@
                 <li><a href="<?= base_url('adm/service'); ?>"><i class='bx bx-radio-circle'></i>Service</a></li>
                 <li><a href="<?= base_url('adm/bisnis-produk'); ?>"><i class='bx bx-radio-circle'></i>Bisnis Produk</a></li>
                 <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Partner</a></li>
-                <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>FAQ</a></li>
+                <li><a href="<?= base_url('adm/faq'); ?>"><i class='bx bx-radio-circle'></i>FAQ</a></li>
             </ul>
         </li>
 

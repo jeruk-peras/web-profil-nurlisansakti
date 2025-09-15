@@ -13,8 +13,9 @@ class ViewCellLibrary extends BaseController
     {
         $this->modelMenu = new MenuModel();
     }
-    
-    public function menu(){
+
+    public function menu()
+    {
 
         $data = [
             'menu' => $this->modelMenu->where('level', 1)->orderBy('order', 'ASC')->findAll(),
@@ -24,7 +25,8 @@ class ViewCellLibrary extends BaseController
         return view('viewcell/main-menu', $data);
     }
 
-    public function slider(){
+    public function slider()
+    {
 
         $data = [
             'slider' => $this->db->table('slider')->get()->getResultArray()
@@ -33,7 +35,8 @@ class ViewCellLibrary extends BaseController
         return view('viewcell/slider', $data);
     }
 
-    public function service(){
+    public function service()
+    {
 
         $data = [
             'service' => $this->db->table('service')->get()->getResultArray()
@@ -42,7 +45,8 @@ class ViewCellLibrary extends BaseController
         return view('viewcell/service', $data);
     }
 
-    public function bisnis_produk(){
+    public function bisnis_produk()
+    {
 
         $data = [
             'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
@@ -58,5 +62,16 @@ class ViewCellLibrary extends BaseController
         ];
 
         return view('viewcell/bisnis_produk_aside', $data);
+    }
+
+    public function faq($limit = null)
+    {
+        $data = [
+            'faq' => $this->db->table('faq')->when($limit, function ($query) use ($limit) {
+                $query->limit($limit);
+            })->get()->getResultArray()
+        ];
+
+        return view('/viewcell/faq', $data);
     }
 }

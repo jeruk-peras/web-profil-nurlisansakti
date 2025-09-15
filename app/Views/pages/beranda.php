@@ -51,98 +51,6 @@
 </section>
 <!-- cta-area-end -->
 
-<!-- faq-area -->
-<section class="faq-area fix" style="background-color: #0c2957;">
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-6">
-                <div class="section-title mb-50">
-                    <h5>FAQ</h5>
-                    <h2>Frequently Asked Question</h2>
-                </div>
-                <div class="faq-wrap">
-                    <div class="accordion" id="accordionExample">
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                                <h2 class="mb-0">
-                                    <button class="faq-btn" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree" aria-bs-expanded="true" aria-bs-controls="collapseThree">
-                                        Vivamus rhoncus ante a ipsum imperdiet ?
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseThree" class="collapse show" aria-bs-labelledby="headingThree"
-                                data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="faq-btn collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-bs-expanded="false" aria-bs-controls="collapseOne">
-                                        Integer id dolor at nisi laoreet iaculis vitae ?
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                                <h2 class="mb-0">
-                                    <button class="faq-btn collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo" aria-bs-expanded="false" aria-bs-controls="collapseTwo">
-                                        Donec venenatis elit dignissim, posuere ?
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h2 class="mb-0">
-                                    <button class="faq-btn collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#headingFour" aria-bs-expanded="false" aria-bs-controls="headingFour">
-                                        Curabitur varius, massa sit amet egestas ?
-                                    </button>
-                                </h2>
-                            </div>
-                            <div id="headingFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                                <div class="card-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="faq-img text-right">
-                    <img src="img/bg/faq-img.jpg" alt="img" class="img">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- faq-aread-end -->
-
 <!-- gallery-area -->
 <section id="work" class="pt-120 pb-105">
     <div class="container mb-50">
@@ -317,6 +225,10 @@
     </div>
 </section>
 <!-- blog-area-end -->
+
+<!-- faq-area -->
+<?= view_cell('\App\Libraries\ViewCellLibrary::faq', ['limit' => 5]) ?>
+<!-- faq-area-end -->
 
 <!-- brand-area -->
 <div class="brand-area pt-60 pb-60" style="background-color:#e81c2e">
