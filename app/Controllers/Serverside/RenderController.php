@@ -62,4 +62,19 @@ class RenderController extends BaseController
             return ResponseJSONCollection::success($th->getMessage(), 'Terjadi Kesalahan', ResponseInterface::HTTP_BAD_GATEWAY);
         }
     }
+
+    public function bisnis_produk()
+    {
+        try {
+            $data = [
+                'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
+            ];
+
+            $html = view('admin/pages/bisnis_produk/side-data', $data);
+
+            return ResponseJSONCollection::success($html, 'Success load Data', ResponseInterface::HTTP_OK);
+        } catch (\Throwable $th) {
+            return ResponseJSONCollection::success($th->getMessage(), 'Terjadi Kesalahan', ResponseInterface::HTTP_BAD_GATEWAY);
+        }
+    }
 }

@@ -6,7 +6,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
-                            <a href="index.html"><img src="img/logo/logo.png" alt="logo"></a>
+                            <a href="index.html"><img src="/img/logo/logo.png" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-xl-7 col-lg-7">
@@ -23,7 +23,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="icon"><img src="img/bg/top-m-icon.png" alt="top-m-icon.png"></div>
+                                    <div class="icon"><img src="/img/bg/top-m-icon.png" alt="top-m-icon.png"></div>
                                     <div class="text">
                                         <span>Call Now !</span>
                                         <strong>+91 705 210-1786</strong>

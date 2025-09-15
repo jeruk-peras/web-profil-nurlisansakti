@@ -41,4 +41,22 @@ class ViewCellLibrary extends BaseController
 
         return view('viewcell/service', $data);
     }
+
+    public function bisnis_produk(){
+
+        $data = [
+            'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
+        ];
+
+        return view('viewcell/bisnis_produk', $data);
+    }
+
+    public function aside_bisnis_produk(){
+
+        $data = [
+            'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
+        ];
+
+        return view('viewcell/bisnis_produk_aside', $data);
+    }
 }

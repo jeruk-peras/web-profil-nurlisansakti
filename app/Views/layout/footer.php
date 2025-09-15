@@ -1,4 +1,4 @@
- <footer class="footer-bg footer-p pt-90" style="background-color: #0c2957; background-image: url(img/bg/footer-bg.png);">
+ <footer class="footer-bg footer-p pt-90" style="background-color: #0c2957; background-image: url(/img/bg/footer-bg.png);">
      <div class="footer-top pb-70">
          <div class="container">
              <div class="row justify-content-between">
@@ -43,14 +43,14 @@
                          <div class="recent-blog-footer">
                              <ul>
                                  <li>
-                                     <div class="thum"> <img src="img/blog/s-blogimg-01.png" alt="img"></div>
+                                     <div class="thum"> <img src="/img/blog/s-blogimg-01.png" alt="img"></div>
                                      <div class="text"> <a href="#">Nothing impossble to need hard work</a>
                                          <span>7 March, 2020</span>
                                      </div>
                                  </li>
 
                                  <li>
-                                     <div class="thum"> <img src="img/blog/s-blogimg-02.png" alt="img"></div>
+                                     <div class="thum"> <img src="/img/blog/s-blogimg-02.png" alt="img"></div>
                                      <div class="text"> <a href="#">Nothing impossble to need hard work</a>
                                          <span>7 March, 2020</span>
                                      </div>
@@ -88,7 +88,7 @@
              <div class="row align-items-center">
                  <div class="col-lg-4">
 
-                     <img src="img/logo/f_logo.png" alt="img">
+                     <img src="/img/logo/f_logo.png" alt="img">
                  </div>
                  <div class="col-lg-4">
                      <div class="copy-text">
