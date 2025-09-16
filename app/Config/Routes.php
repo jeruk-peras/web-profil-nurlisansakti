@@ -31,6 +31,7 @@ $routes->group('render', function ($routes) {
     $routes->get('bisnis-produk', 'Serverside\RenderController::bisnis_produk');
     $routes->get('faq', 'Serverside\RenderController::faq');
     $routes->get('partner', 'Serverside\RenderController::partner');
+    $routes->get('kategori', 'Serverside\RenderController::kategori');
 });
 
 // datatables
@@ -113,5 +114,16 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\PartnerController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\PartnerController::delete/$1');
+    });
+
+    // routes kategori galeri
+    $routes->group('galeri', function ($routes) {
+        $routes->get('kategori', 'Administrator\GaleriController::kategori');
+        $routes->post('kategori', 'Administrator\GaleriController::saveKategori');
+        
+        $routes->get('(:num)/edit-kategori', 'Administrator\GaleriController::editKategori/$1');
+        $routes->post('(:num)/edit-kategori', 'Administrator\GaleriController::updateKategori/$1');
+        
+        $routes->post('(:num)/delete-kategori', 'Administrator\GaleriController::deleteKategori/$1');
     });
 });
