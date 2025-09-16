@@ -115,7 +115,25 @@ class RenderController extends BaseController
                 'kategori' => $this->db->table('kategori')->get()->getResultArray()
             ];
 
+
             $html = view('admin/pages/galeri/kategori/side-data', $data);
+
+            return ResponseJSONCollection::success($html, 'Success load Data', ResponseInterface::HTTP_OK);
+        } catch (\Throwable $th) {
+            return ResponseJSONCollection::success($th->getMessage(), 'Terjadi Kesalahan', ResponseInterface::HTTP_BAD_GATEWAY);
+        }
+    }
+
+    public function foto()
+    {
+        try {
+            $data = [
+                'galeri' => $this->db->table('galeri')
+                ->select('galeri.*, kategori.kategori')
+                ->join('kategori', 'kategori.id = galeri.kategori_id')->get()->getResultArray()
+            ];
+
+            $html = view('admin/pages/galeri/foto/side-data', $data);
 
             return ResponseJSONCollection::success($html, 'Success load Data', ResponseInterface::HTTP_OK);
         } catch (\Throwable $th) {

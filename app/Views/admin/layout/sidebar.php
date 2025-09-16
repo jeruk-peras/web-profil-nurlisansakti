@@ -57,7 +57,7 @@
             </a>
             <ul class="mm-collapse">
                 <li><a href="<?= base_url('adm/galeri/kategori'); ?>"><i class='bx bx-radio-circle'></i>Kategori</a></li>
-                <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Foto</a></li>
+                <li><a href="<?= base_url('adm/galeri'); ?>"><i class='bx bx-radio-circle'></i>Foto</a></li>
             </ul>
         </li>
 

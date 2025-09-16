@@ -35,4 +35,13 @@ class PagesController extends BaseController
 
         return view('/pages/faq', $data);
     }
+
+    public function galeri(): string
+    {
+        $data = [
+            'title' => $this->title,
+        ];
+
+        return view('/pages/galeri', $data);
+    }
 }

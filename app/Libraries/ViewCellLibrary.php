@@ -55,7 +55,8 @@ class ViewCellLibrary extends BaseController
         return view('viewcell/bisnis_produk', $data);
     }
 
-    public function aside_bisnis_produk(){
+    public function aside_bisnis_produk()
+    {
 
         $data = [
             'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
@@ -75,12 +76,24 @@ class ViewCellLibrary extends BaseController
         return view('/viewcell/faq', $data);
     }
 
-     public function partner(){
+    public function partner()
+    {
 
         $data = [
             'partner' => $this->db->table('partner')->get()->getResultArray()
         ];
 
         return view('viewcell/partner', $data);
+    }
+
+    public function galeri()
+    {
+
+        $data = [
+            'kategori' => $this->db->table('kategori')->get()->getResultArray(),
+            'galeri' => $this->db->table('galeri')->get()->getResultArray()
+        ];
+
+        return view('viewcell/galeri', $data);
     }
 }

@@ -87,4 +87,14 @@ class ApiController extends BaseController
 
         return ResponseJSONCollection::success($data);
     }
+
+     // data kategori
+    public function kategori()
+    {
+        $data = $this->db->table('kategori')->get()->getResultArray();
+
+        // tabah dengan halaman
+
+        return ResponseJSONCollection::success($data);
+    }
 }

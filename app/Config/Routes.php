@@ -15,12 +15,14 @@ $routes->group('/', function ($routes) {
     $routes->get('/bisnis-produk/(:any)', 'PagesController::bisnis_produk/$1');
 
     $routes->get('/faq', 'PagesController::faq');
+    $routes->get('/galeri', 'PagesController::galeri');
 });
 
 // api
 $routes->group('api', function ($routes) {
     $routes->post('upload-file', 'Serverside\ApiController::upload_image');
     $routes->get('url', 'Serverside\ApiController::url');
+    $routes->get('kategori', 'Serverside\ApiController::kategori');
 });
 
 // render data
@@ -32,6 +34,7 @@ $routes->group('render', function ($routes) {
     $routes->get('faq', 'Serverside\RenderController::faq');
     $routes->get('partner', 'Serverside\RenderController::partner');
     $routes->get('kategori', 'Serverside\RenderController::kategori');
+    $routes->get('foto', 'Serverside\RenderController::foto');
 });
 
 // datatables
@@ -118,6 +121,16 @@ $routes->group('adm', function ($routes) {
 
     // routes kategori galeri
     $routes->group('galeri', function ($routes) {
+        // galeri foto
+        $routes->get('/', 'Administrator\GaleriController::index');
+        $routes->post('/', 'Administrator\GaleriController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\GaleriController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\GaleriController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\GaleriController::delete/$1');
+
+        // kategori galeri
         $routes->get('kategori', 'Administrator\GaleriController::kategori');
         $routes->post('kategori', 'Administrator\GaleriController::saveKategori');
         
