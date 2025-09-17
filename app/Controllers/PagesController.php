@@ -85,4 +85,21 @@ class PagesController extends BaseController
 
         return view('/pages/artikel_detail', $data);
     }
+
+    public function halaman_detail($slug = ''): string
+    {
+        $data = [
+            'title' => $this->title,
+        ];
+
+        $data['halaman'] = $this->db->table('halaman')->when($slug, function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->get()->getRowArray();
+
+        if (!$data['halaman']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
+        }
+
+        return view('/pages/halaman_detail', $data);
+    }
 }

@@ -18,6 +18,7 @@ $routes->group('/', function ($routes) {
     $routes->get('/galeri', 'PagesController::galeri');
     $routes->get('/artikel', 'PagesController::artikel');
     $routes->get('/artikel/(:any)', 'PagesController::artikel_detail/$1');
+    $routes->get('/page/(:any)', 'PagesController::halaman_detail/$1');
 });
 
 // api
