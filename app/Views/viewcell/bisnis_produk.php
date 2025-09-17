@@ -10,9 +10,9 @@
                 <div class="col-lg-4 col-md-4">
                     <div class="services-box-05">
                         <div class="services-icon-05">
-                            <img src="images/bisnis_produk/<?= $row['gambar']; ?>" alt="<?= $row['bisnis_produk']; ?>">
+                            <a href="/bisnis-produk/<?= $row['slug']; ?>"><img src="images/bisnis_produk/<?= $row['gambar']; ?>" alt="<?= $row['bisnis_produk']; ?>"></a>
                         </div>
-                        <div class="services-content-05">
+                        <div class="services-content-05 text-center p-3">
                             <h3><a href="/bisnis-produk/<?= $row['slug']; ?>"><?= $row['bisnis_produk']; ?></a></h3>
                         </div>
                     </div>
