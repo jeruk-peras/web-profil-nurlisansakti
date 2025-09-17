@@ -52,6 +52,15 @@ class ApiController extends BaseController
             ];
         }
 
+        // ambil data halaman
+        $halaman = $this->db->table('halaman')->get()->getResultArray();
+        foreach ($halaman as $row) {
+            $data[] = [
+                'name' => '/page/' . $row['slug'],
+                'url'  => '/page/' . $row['slug']
+            ];
+        }
+
         $data = array_merge($data, [
             [
                 'name' => '/beranda',
