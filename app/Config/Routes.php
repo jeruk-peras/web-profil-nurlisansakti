@@ -38,6 +38,7 @@ $routes->group('render', function ($routes) {
     $routes->get('kategori', 'Serverside\RenderController::kategori');
     $routes->get('foto', 'Serverside\RenderController::foto');
     $routes->get('artikel', 'Serverside\RenderController::artikel');
+    $routes->get('halaman', 'Serverside\RenderController::halaman');
 });
 
 // datatables
@@ -61,6 +62,19 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/submenu', 'Administrator\MenuController::save/$1');
 
         $routes->post('(:num)/delete', 'Administrator\MenuController::delete/$1');
+    });
+
+    // Halaman routes
+    $routes->group('halaman', function ($routes) {
+        $routes->get('/', 'Administrator\HalamanController::index');
+        
+        $routes->get('add', 'Administrator\HalamanController::add');
+        $routes->post('add', 'Administrator\HalamanController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\HalamanController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\HalamanController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\HalamanController::delete/$1');
     });
 
     // slider routes
