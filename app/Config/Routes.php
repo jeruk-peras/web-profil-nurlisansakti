@@ -16,6 +16,8 @@ $routes->group('/', function ($routes) {
 
     $routes->get('/faq', 'PagesController::faq');
     $routes->get('/galeri', 'PagesController::galeri');
+    $routes->get('/artikel', 'PagesController::artikel');
+    $routes->get('/artikel/(:any)', 'PagesController::artikel_detail/$1');
 });
 
 // api
@@ -35,6 +37,7 @@ $routes->group('render', function ($routes) {
     $routes->get('partner', 'Serverside\RenderController::partner');
     $routes->get('kategori', 'Serverside\RenderController::kategori');
     $routes->get('foto', 'Serverside\RenderController::foto');
+    $routes->get('artikel', 'Serverside\RenderController::artikel');
 });
 
 // datatables
@@ -138,5 +141,18 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit-kategori', 'Administrator\GaleriController::updateKategori/$1');
         
         $routes->post('(:num)/delete-kategori', 'Administrator\GaleriController::deleteKategori/$1');
+    });
+
+    // artikel routes
+    $routes->group('artikel', function ($routes) {
+        $routes->get('/', 'Administrator\ArtikelController::index');
+        
+        $routes->get('add', 'Administrator\ArtikelController::add');
+        $routes->post('add', 'Administrator\ArtikelController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\ArtikelController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\ArtikelController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\ArtikelController::delete/$1');
     });
 });

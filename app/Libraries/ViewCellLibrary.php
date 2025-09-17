@@ -96,4 +96,35 @@ class ViewCellLibrary extends BaseController
 
         return view('viewcell/galeri', $data);
     }
+
+    public function artikel($limit = 3, $col = 3)
+    {
+
+        $data = [
+            'artikel' => $this->db->table('artikel')->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
+            'col' => $col
+        ];
+
+        return view('viewcell/artikel', $data);
+    }
+
+    public function aside_artikel($limit = 2)
+    {
+
+        $data = [
+            'artikel' => $this->db->table('artikel')->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
+        ];
+
+        return view('viewcell/aside_artikel', $data);
+    }
+
+    public function aside_media()
+    {
+        return view('viewcell/aside_media');
+    }
+
+    public function aside_phone()
+    {
+        return view('viewcell/aside_phone');
+    }
 }

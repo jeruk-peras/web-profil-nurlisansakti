@@ -44,4 +44,45 @@ class PagesController extends BaseController
 
         return view('/pages/galeri', $data);
     }
+
+    public function artikel(): string
+    {
+        $data = [
+            'title' => $this->title,
+        ];
+
+        $limit = 3;
+        $offset = ($this->request->getGet('page') ? (($this->request->getGet('page') - 1) * $limit) : 0);
+
+        $countAllData = $this->db->table('artikel')->get()->getResultArray();
+        $countData = count($countAllData) >= $limit ? count($countAllData) : 0;
+        $pages = ($countData / $limit);
+
+        $data['page'] = floor($pages);
+
+        $data['artikel'] = $this->db->table('artikel')->orderBy('created_at', 'DESC')->get($limit, $offset)->getResultArray();
+
+        if (!$data['artikel']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
+        }
+
+        return view('/pages/artikel', $data);
+    }
+
+    public function artikel_detail($slug = ''): string
+    {
+        $data = [
+            'title' => $this->title,
+        ];
+
+        $data['artikel'] = $this->db->table('artikel')->when($slug, function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->get()->getRowArray();
+
+        if (!$data['artikel']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
+        }
+
+        return view('/pages/artikel_detail', $data);
+    }
 }

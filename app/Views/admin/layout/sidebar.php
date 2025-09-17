@@ -30,7 +30,7 @@
         </li>
 
         <li>
-            <a href="<?= base_url('unit'); ?>">
+            <a href="<?= base_url('adm/artikel'); ?>">
                 <div class="parent-icon"><i class='bx bx-news'></i></div>
                 <div class="menu-title">Artikel</div>
             </a>
