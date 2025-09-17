@@ -7,7 +7,7 @@
                     <h2 style="color: #00173c !important;">Frequently Asked Question</h2>
                 </div>
                 <div class="faq-wrap">
-                    <div class="accordion" id="accordionFAQ">
+                    <div class="accordion" id="accordionExample">
                         <?php foreach ($faq as $row): ?>
                             <div class="card">
                                 <div class="card-header" id="heading<?= $row['id']; ?>">
