@@ -16,9 +16,13 @@ $routes->group('/', function ($routes) {
 
     $routes->get('/faq', 'PagesController::faq');
     $routes->get('/galeri', 'PagesController::galeri');
+
     $routes->get('/artikel', 'PagesController::artikel');
     $routes->get('/artikel/(:any)', 'PagesController::artikel_detail/$1');
+
     $routes->get('/page/(:any)', 'PagesController::halaman_detail/$1');
+
+    $routes->get('/kontak', 'PagesController::kontak');
 });
 
 // api
@@ -169,5 +173,11 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\ArtikelController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\ArtikelController::delete/$1');
+    });
+
+    // Kontak routes
+    $routes->group('kontak', function ($routes) {
+        $routes->get('/', 'Administrator\KontakController::index');
+        $routes->post('/', 'Administrator\KontakController::update');
     });
 });

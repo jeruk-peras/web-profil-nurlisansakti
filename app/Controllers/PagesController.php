@@ -102,4 +102,13 @@ class PagesController extends BaseController
 
         return view('/pages/halaman_detail', $data);
     }
+
+    public function kontak(): string
+    {
+        $data = [
+            'title' => $this->title,
+        ];
+
+        return view('/pages/kontak', $data);
+    }
 }

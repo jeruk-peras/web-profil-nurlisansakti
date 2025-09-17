@@ -24,3 +24,18 @@ function lastUpdatedPost($datetime)
         return "Last updated {$days} days ago";
     }
 }
+
+/**
+ * Kontak Helper
+ * helper fungsi ini unuk mengambil data kontak dari database
+ * @param string $kontak
+ * @return string 
+ */
+function getKontak($kontak) 
+{
+    $db = \Config\Database::connect();
+
+    $KontakModel = $db->table('kontak');
+    $data = $KontakModel->where(['kontak' => $kontak])->get()->getRowArray();
+    return $data['data'] ?? '';
+}

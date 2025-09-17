@@ -14,9 +14,9 @@
 
                  <div class="col-lg-4 text-right text-xl-right">
                      <div class="footer-social mt-10">
-                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                         <a href="#"><i class="fab fa-instagram"></i></a>
-                         <a href="#"><i class="fab fa-twitter"></i></a>
+                         <a href="<?= getKontak('instagram'); ?>"><i class="fab fa-instagram"></i></a>
+                         <a href="<?= getKontak('facebook'); ?>"><i class="fab fa-facebook-f"></i></a>
+                         <a href="<?= getKontak('youtube'); ?>"><i class="fab fa-youtube"></i></a>
                      </div>
                  </div>
              </div>

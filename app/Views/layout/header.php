@@ -1,5 +1,5 @@
 <header class="header-area header-three">
-    
+
     <div id="header-sticky" class="menu-area">
         <div class="container">
             <div class="second-menu">
@@ -23,11 +23,15 @@
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="icon"><img src="/img/bg/top-m-icon.png" alt="top-m-icon.png"></div>
-                                    <div class="text">
-                                        <span>Call Now !</span>
-                                        <strong>+91 705 210-1786</strong>
-                                    </div>
+                                    <a href="https://wa.me/<?= getKontak('whatsapp'); ?>" title="Call now">
+                                        <div class="icon"><img src="/img/bg/top-m-icon.png" alt="top-m-icon.png"></div>
+                                        <div class="text">
+                                            <span>Call Now !</span>
+                                            <strong>
+                                                <?= getKontak('whatsapp'); ?>
+                                            </strong>
+                                        </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

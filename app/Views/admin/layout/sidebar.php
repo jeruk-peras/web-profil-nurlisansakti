@@ -73,7 +73,7 @@
         </li>
 
         <li>
-            <a href="<?= base_url('inventory/assets'); ?>">
+            <a href="<?= base_url('adm/kontak'); ?>">
                 <div class="parent-icon"><i class='bx bx-phone-call'></i></div>
                 <div class="menu-title">Kontak</div>
             </a>
