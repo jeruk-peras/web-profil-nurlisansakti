@@ -86,8 +86,8 @@ class PagesController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
         }
 
-        $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
-        $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
+        $data['deskripsi'] = $data['artikel']['deskripsi'];
+        $data['kata_kunci'] = $data['artikel']['kata_kunci'];
 
         return view('/pages/artikel_detail', $data);
     }
@@ -104,8 +104,8 @@ class PagesController extends BaseController
         }
 
         $data['title'] = $data['halaman']['judul_halaman'];
-        $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
-        $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
+        $data['deskripsi'] = $data['halaman']['deskripsi'];
+        $data['kata_kunci'] = $data['halaman']['kata_kunci'];
 
         return view('/pages/halaman_detail', $data);
     }
