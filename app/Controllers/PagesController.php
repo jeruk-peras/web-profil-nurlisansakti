@@ -110,6 +110,41 @@ class PagesController extends BaseController
         return view('/pages/halaman_detail', $data);
     }
 
+    public function karir(): string
+    {
+        $data = [
+            'title' => 'Karir',
+        ];
+
+        $data['karir'] = $this->db->table('karir')->orderBy('created_at', 'DESC')->get()->getResultArray();
+
+        if (!$data['karir']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('karir tidak ditemukan');
+        }
+
+        return view('/pages/karir', $data);
+    }
+
+    public function karir_detail($slug = ''): string
+    {
+        $data = [
+            'title' => 'karir',
+        ];
+
+        $data['karir'] = $this->db->table('karir')->when($slug, function ($query) use ($slug) {
+            $query->where('slug', $slug);
+        })->get()->getRowArray();
+
+        if (!$data['karir']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('karir tidak ditemukan');
+        }
+
+        $data['deskripsi'] = $data['karir']['deskripsi'];
+        $data['kata_kunci'] = $data['karir']['kata_kunci'];
+
+        return view('/pages/karir_detail', $data);
+    }
+
     public function kontak(): string
     {
         $data = [

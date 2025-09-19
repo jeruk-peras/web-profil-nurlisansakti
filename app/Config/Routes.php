@@ -19,8 +19,11 @@ $routes->group('/', function ($routes) {
 
     $routes->get('/artikel', 'PagesController::artikel');
     $routes->get('/artikel/(:any)', 'PagesController::artikel_detail/$1');
-
+    
     $routes->get('/page/(:any)', 'PagesController::halaman_detail/$1');
+    
+    $routes->get('/karir', 'PagesController::karir');
+    $routes->get('/karir/(:any)', 'PagesController::karir_detail/$1');
 
     $routes->get('/kontak', 'PagesController::kontak');
 });
