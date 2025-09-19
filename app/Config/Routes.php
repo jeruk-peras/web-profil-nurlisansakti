@@ -44,6 +44,7 @@ $routes->group('render', function ($routes) {
     $routes->get('foto', 'Serverside\RenderController::foto');
     $routes->get('artikel', 'Serverside\RenderController::artikel');
     $routes->get('halaman', 'Serverside\RenderController::halaman');
+    $routes->get('karir', 'Serverside\RenderController::karir');
 });
 
 // datatables
@@ -173,6 +174,19 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\ArtikelController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\ArtikelController::delete/$1');
+    });
+
+    // Karir routes
+    $routes->group('karir', function ($routes) {
+        $routes->get('/', 'Administrator\KarirController::index');
+        
+        $routes->get('add', 'Administrator\KarirController::add');
+        $routes->post('add', 'Administrator\KarirController::save');
+        
+        $routes->get('(:num)/edit', 'Administrator\KarirController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\KarirController::update/$1');
+        
+        $routes->post('(:num)/delete', 'Administrator\KarirController::delete/$1');
     });
 
     // Kontak routes

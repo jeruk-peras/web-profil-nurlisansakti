@@ -67,7 +67,7 @@
                 <div class="menu-title">Karir</div>
             </a>
             <ul class="mm-collapse">
-                <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Data</a></li>
+                <li><a href="<?= base_url('adm/karir'); ?>"><i class='bx bx-radio-circle'></i>Data</a></li>
                 <li><a href="<?= base_url('material'); ?>"><i class='bx bx-radio-circle'></i>Apply</a></li>
             </ul>
         </li>
