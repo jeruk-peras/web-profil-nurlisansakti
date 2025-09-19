@@ -28,7 +28,7 @@
                                         <div class="text">
                                             <span>Call Now !</span>
                                             <strong>
-                                                <?= getKontak('whatsapp'); ?>
+                                                <?= getKontak('telepon') ? getKontak('telepon') : getKontak('whatsapp'); ?>
                                             </strong>
                                         </div>
                                     </a>
