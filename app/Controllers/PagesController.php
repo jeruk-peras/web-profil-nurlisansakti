@@ -9,7 +9,7 @@ class PagesController extends BaseController
     public function beranda(): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Beranda',
         ];
         return view('/pages/beranda', $data);
     }
@@ -17,12 +17,15 @@ class PagesController extends BaseController
     public function bisnis_produk($slug = ''): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Bisnis & Produk',
         ];
 
         $data['bisnis_produk'] = $this->db->table('bisnis_produk')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->get()->getRowArray();
+
+        $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
+        $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
 
         return view('/pages/bisnis_produk_detail', $data);
     }
@@ -30,7 +33,7 @@ class PagesController extends BaseController
     public function faq(): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'FAQ',
         ];
 
         return view('/pages/faq', $data);
@@ -39,7 +42,7 @@ class PagesController extends BaseController
     public function galeri(): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Galeri',
         ];
 
         return view('/pages/galeri', $data);
@@ -48,7 +51,7 @@ class PagesController extends BaseController
     public function artikel(): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Artikel',
         ];
 
         $limit = 3;
@@ -72,7 +75,7 @@ class PagesController extends BaseController
     public function artikel_detail($slug = ''): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Artikel',
         ];
 
         $data['artikel'] = $this->db->table('artikel')->when($slug, function ($query) use ($slug) {
@@ -83,15 +86,15 @@ class PagesController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
         }
 
+        $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
+        $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
+
         return view('/pages/artikel_detail', $data);
     }
 
     public function halaman_detail($slug = ''): string
     {
-        $data = [
-            'title' => $this->title,
-        ];
-
+        $data = [];
         $data['halaman'] = $this->db->table('halaman')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->get()->getRowArray();
@@ -100,13 +103,17 @@ class PagesController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
         }
 
+        $data['title'] = $data['halaman']['judul_halaman'];
+        $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
+        $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
+
         return view('/pages/halaman_detail', $data);
     }
 
     public function kontak(): string
     {
         $data = [
-            'title' => $this->title,
+            'title' => 'Kontak',
         ];
 
         return view('/pages/kontak', $data);

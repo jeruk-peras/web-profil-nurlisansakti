@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title><?= $title; ?> - PT. NUR LISAN SAKTI </title>
-    <meta name="description" content="">
+    <meta name="description" content="<?= $deskripsi ?? ''; ?>">
+    <meta name="keyword" content="<?= $kata_kunci ?? ''; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="/img/favicon-32x32.png">
     <!-- Place favicon.ico in the root directory -->
