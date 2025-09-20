@@ -24,6 +24,7 @@ $routes->group('/', function ($routes) {
     
     $routes->get('/karir', 'PagesController::karir');
     $routes->get('/karir/(:any)', 'PagesController::karir_detail/$1');
+    $routes->post('/karir/(:any)', 'Administrator\KarirController::apply/$1');
 
     $routes->get('/kontak', 'PagesController::kontak');
 });
