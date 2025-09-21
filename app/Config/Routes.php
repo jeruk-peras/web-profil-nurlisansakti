@@ -183,6 +183,7 @@ $routes->group('adm', function ($routes) {
     // Karir routes
     $routes->group('karir', function ($routes) {
         $routes->get('/', 'Administrator\KarirController::index');
+        $routes->get('(:num)/data', 'Administrator\KarirController::dataKarirApply/$1');
         
         $routes->get('add', 'Administrator\KarirController::add');
         $routes->post('add', 'Administrator\KarirController::save');
@@ -191,6 +192,9 @@ $routes->group('adm', function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\KarirController::update/$1');
         
         $routes->post('(:num)/delete', 'Administrator\KarirController::delete/$1');
+
+        $routes->get('(:num)/detail-data', 'Administrator\KarirController::detailData/$1');
+        $routes->post('(:num)/delete-data', 'Administrator\KarirController::deleteData/$1');
     });
 
     // Kontak routes

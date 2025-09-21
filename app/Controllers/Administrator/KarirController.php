@@ -130,10 +130,9 @@ class KarirController extends BaseController
             'nomor_telepon' => 'required',
             'pesan' => 'required',
             'upload_file' => [
-                'rules' => 'uploaded[upload_file]|max_size[upload_file,2048]|ext_in[upload_file,pdf,doc,docx]',
+                'rules' => 'max_size[upload_file,5120]|ext_in[upload_file,pdf,doc,docx]',
                 'errors' => [
-                    'uploaded' => 'File wajib diisi.',
-                    'max_size' => 'Ukuran file maksimal 2MB.',
+                    'max_size' => 'Ukuran file maksimal 5MB.',
                     'ext_in' => 'Format file harus berupa pdf, doc, atau docx.'
                 ]
             ],
@@ -146,7 +145,7 @@ class KarirController extends BaseController
             // Mengambil error dari validasi
             $errors = $this->validator->getErrors();
             // Mengembalikan response error dengan status 400
-            return ResponseJSONCollection::error($errors, 'Validasi gagal', ResponseInterface::HTTP_BAD_REQUEST);
+            return redirect()->back()->withInput()->with('errors', $errors);
         }
         // end validasi gambar
 
@@ -173,9 +172,52 @@ class KarirController extends BaseController
         try {
             $this->db->table('karir_apply')->insert($data); // save data
 
-          return redirect()->to('/karir/' . $slug)->with('success', 'Lamaran berhasil dikirim. Terima kasih telah melamar di PT Nur Lisan Sakti.');
+            return redirect()->to('/karir/' . $slug)->with('success', 'Lamaran berhasil dikirim. Terima kasih telah melamar di PT Nur Lisan Sakti.');
         } catch (\Throwable $e) {
             return ResponseJSONCollection::error([$e->getMessage()], 'Terjadi kesalahan server.', ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function dataKarirApply(int $id)
+    {
+        // return PageNotFoundException::forPageNotFound('Data tidak ditemukan.');
+        $data = $this->db->table('karir_apply')->where('karir_id', $id)->get()->getResultArray(); // mengambil data
+        return view('admin/pages/karir/data', [
+            'title' => $this->title,
+            'data' => $data
+        ]);
+        try {
+            // jika data tidak ditemukan
+            if (!$data) {
+            }
+        } catch (\Throwable $e) {
+            return PageNotFoundException::forPageNotFound($e->getMessage());
+        }
+    }
+
+    public function detailData($id)
+    {
+        $data = $this->db->table('karir_apply')->where('id', $id)->get()->getRowArray(); // mengambil data
+        if (!$data) {
+            return ResponseJSONCollection::error([], 'Data tidak ditemukan.', ResponseInterface::HTTP_NOT_FOUND);
+        }
+
+        return ResponseJSONCollection::success($data, 'Data berhasil dihapus.', ResponseInterface::HTTP_OK);
+    }
+
+    public function deleteData($id)
+    {
+        try {
+            $upload_file = $this->db->table('karir_apply')->where('id', $id)->get()->getRowArray()['upload_file'];
+            $path = './uploads/karir/';
+            if (file_exists($path . $upload_file)) {
+                unlink($path . $upload_file);
+            }
+
+            $this->db->table('karir_apply')->where('id', $id)->delete();
+            return ResponseJSONCollection::success([], 'Data berhasil dihapus.', ResponseInterface::HTTP_OK);
+        } catch (\Throwable $e) {
+            return ResponseJSONCollection::error([], 'Data tidak bisa dihapus.', ResponseInterface::HTTP_BAD_REQUEST);
         }
     }
 }
