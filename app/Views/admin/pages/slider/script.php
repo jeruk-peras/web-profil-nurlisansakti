@@ -185,8 +185,8 @@
                         '<?= csrf_token() ?>': '<?= csrf_hash() ?>'
                     },
                     success: async function(response) {
-                        await FetchMenu();
-                        initSortable();
+                        await FetchSlider();
+                        refreshTooltips();
                         alertMesage(response.status, response.message);
                     },
                     error: function(xhr, status, error) {
