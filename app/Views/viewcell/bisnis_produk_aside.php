@@ -1,6 +1,6 @@
  <div class="sidebar-widget categories">
      <div class="widget-content">
-         <h2 class="widget-title"> Services List </h2>
+         <h2 class="widget-title"> Layanan Kami </h2>
          <!-- Services Category -->
          <ul class="services-categories">
              <?php foreach ($bisnis_produk as $row): ?>

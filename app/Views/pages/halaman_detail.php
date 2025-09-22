@@ -1,28 +1,7 @@
 <?= $this->extend('layout/index'); ?>
 <?= $this->section('content'); ?>
 <!-- breadcrumb-area -->
-<section class="breadcrumb-area d-flex align-items-center" style="min-height: 190px !important; background-image:url(/img/bg/bdrc-bg.jpg);">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-xl-12 col-lg-12">
-                <div class="breadcrumb-wrap text-left">
-                    <div class="breadcrumb-title">
-                        <h2><?= $halaman['judul_halaman']; ?></h2>
-                        <div class="breadcrumb-wrap">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page"><?= $halaman['judul_halaman']; ?></li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+<?= view_cell('\App\Libraries\ViewCellLibrary::breadcrumb', ['title' => $halaman['judul_halaman'], 'active_page' => $halaman['judul_halaman']]) ?>
 <!-- breadcrumb-area-end -->
 <!-- inner-blog -->
 <section class="inner-blog b-details-p pt-120 pb-120">
@@ -41,7 +20,7 @@
                     </div>
                     <div class="related__post mt-45 mb-85">
                         <div class="post-title">
-                            <h4>Recent Posts</h4>
+                            <h4>Artikel Terbaru</h4>
                         </div>
                         <div class="row">
                             <?= view_cell('\App\Libraries\ViewCellLibrary::artikel', ['limit' => 2, 'col' => 6]) ?>

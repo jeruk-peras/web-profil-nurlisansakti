@@ -127,4 +127,15 @@ class ViewCellLibrary extends BaseController
     {
         return view('viewcell/aside_phone');
     }
+
+    public function breadcrumb($title, $active_page, $img = '/img/bg/bdrc-bg.jpg')
+    {
+        $data = [
+            'title' => $title,
+            'active_page' => $active_page,
+            'img' => $img
+        ];
+
+        return view('viewcell/breadcrumb', $data);
+    }
 }

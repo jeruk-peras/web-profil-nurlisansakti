@@ -26,7 +26,7 @@
                                     <a href="https://wa.me/<?= getKontak('whatsapp'); ?>" title="Call now">
                                         <div class="icon"><img src="/img/bg/top-m-icon.png" alt="top-m-icon.png"></div>
                                         <div class="text">
-                                            <span>Call Now !</span>
+                                            <span>Hubungi Kami !</span>
                                             <strong>
                                                 <?= getKontak('telepon') ? getKontak('telepon') : getKontak('whatsapp'); ?>
                                             </strong>

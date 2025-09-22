@@ -1,5 +1,5 @@
 <section id="custom_html-5" class="widget_text widget widget_custom_html">
-    <h2 class="widget-title">Follow Us</h2>
+    <h2 class="widget-title">Ikuti Kami di</h2>
     <div class="textwidget custom-html-widget">
         <div class="widget-social">
             <a href="<?= getKontak('instagram'); ?>"><i class="fab fa-instagram"></i></a>

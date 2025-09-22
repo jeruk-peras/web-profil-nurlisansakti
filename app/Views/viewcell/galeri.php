@@ -4,7 +4,7 @@
             <div class="col-xl-5 col-lg-5">
                 <div class="section-title center-align ">
                     <h2>Galeri</h2>
-
+                    <a href="/galeri" class="text-decoration-underline">Lihat Semua Galeri &raquo;</a>
                 </div>
             </div>
             <div class="col-xl-7 col-lg-7">

@@ -1,28 +1,7 @@
 <?= $this->extend('layout/index'); ?>
 <?= $this->section('content'); ?>
 <!-- breadcrumb-area -->
-<section class="breadcrumb-area d-flex align-items-center" style="min-height: 190px !important; background-image:url(/img/bg/bdrc-bg.jpg);">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-xl-12 col-lg-12">
-                <div class="breadcrumb-wrap text-left">
-                    <div class="breadcrumb-title">
-                        <h2>Karir</h2>
-                        <div class="breadcrumb-wrap">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Beranda</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Karir</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+<?= view_cell('\App\Libraries\ViewCellLibrary::breadcrumb', ['title' => $karir['karir'], 'active_page' => 'Karir', 'img' => '/img/bg/bdrc-bg1.jpg']) ?>
 <!-- breadcrumb-area-end -->
 <!-- inner-blog -->
 <section class="inner-blog b-details-p pt-120 pb-120">

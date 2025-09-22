@@ -34,15 +34,15 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section-title cta-title wow fadeInLeft animated" data-animation="fadeInDown animated" data-delay=".2s">
-                    <h3>Get Our Service</h3>
-                    <h2>Get Premium Auto Car Service Feel Free To Contact Us.</h2>
+                    <h3>Dapatkan Layanan Kami</h3>
+                    <h3 class="fs-1">Rasakan Layanan Otomotif Premium, Hubungi Kami Sekarang!</h3>
 
                 </div>
 
             </div>
             <div class="col-lg-4">
                 <div class="cta-btn s-cta-btn wow fadeInRight animated mt-30" data-animation="fadeInDown animated" data-delay=".2s">
-                    <a href="about.html" class="btn ss-btn smoth-scroll">Get Started <i class="fal fa-angle-right"></i></a>
+                    <a href="/kontak" class="btn ss-btn smoth-scroll">Get Started <i class="fal fa-angle-right"></i></a>
                 </div>
             </div>
 

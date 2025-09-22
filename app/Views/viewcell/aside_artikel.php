@@ -1,5 +1,5 @@
 <section id="recent-posts-4" class="widget widget_recent_entries">
-    <h2 class="widget-title">Recent Posts</h2>
+    <h2 class="widget-title">Artikel Terbaru</h2>
     <ul>
         <?php foreach ($artikel as $row) : ?>
             <li>

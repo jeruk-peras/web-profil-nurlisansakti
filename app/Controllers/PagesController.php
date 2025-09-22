@@ -128,7 +128,7 @@ class PagesController extends BaseController
     public function karir_detail($slug = ''): string
     {
         $data = [
-            'title' => 'karir',
+            'title' => 'Karir',
         ];
 
         $data['karir'] = $this->db->table('karir')->when($slug, function ($query) use ($slug) {
