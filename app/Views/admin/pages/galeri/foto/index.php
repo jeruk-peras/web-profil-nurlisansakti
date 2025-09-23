@@ -1,7 +1,7 @@
 <?= $this->extend('admin/layout/index'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
 <div class="page-content">
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-2">
         <div class="breadcrumb-title pe-3">Galeri Foto</div>
@@ -49,7 +49,8 @@
                         </div>
                         <div class="row g-3 justify-content-center">
                             <div class="col-md-9">
-                                <img id="image" style="max-width: 100%;">
+                                <div class="d-none" id="image_demo" style="width: 350px; margin-top: 30px;"></div>
+                                <img class="d-none" id="preview" src="" style="max-width: 100%;">
                             </div>
                         </div>
                     </div>

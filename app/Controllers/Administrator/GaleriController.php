@@ -114,34 +114,10 @@ class GaleriController extends BaseController
     public function save()
     {
         $data = $this->request->getPost(); // mengambil post data
-        $gambar = $this->request->getFile('gambar');
-
-        // validasi gambar
-        $setRules = [
-            'gambar' => [
-                'rules'  => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar maksimal 2MB.',
-                    'is_image' => 'File yang diupload bukan gambar.',
-                    'mime_in' => 'Format gambar tidak valid. Hanya jpg, jpeg, png, gif yang diperbolehkan.'
-                ],
-            ],
-        ];
-
-        $this->validator->setRules($setRules);
-        $isValid = $this->validator->run($data);
-
-        if (!$isValid) { // jika validasi gagal
-            // Mengambil error dari validasi
-            $errors = $this->validator->getErrors();
-            // Mengembalikan response error dengan status 400
-            return ResponseJSONCollection::error($errors, 'Validasi gagal', ResponseInterface::HTTP_BAD_REQUEST);
-        }
-        // end validasi gambar
 
         // upload gambar
         $path = './images/galeri/';
-        if ($gambar) $fileName = UploadFileLibrary::uploadImage($gambar, $path);
+        $fileName = UploadFileLibrary::uploadImageBase64($data['gambar'], $path);
 
         $data = [
             'kategori_id' => $data['kategori_id'],
@@ -182,40 +158,14 @@ class GaleriController extends BaseController
     public function update(int $id)
     {
         $data = $this->request->getPost(); // mengambil post data
-        $gambar = $this->request->getFile('gambar');
-
-        // validasi gambar
-        $setRules = [
-            'gambar' => [
-                'rules'  => 'permit_empty|max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar maksimal 2MB.',
-                    'is_image' => 'File yang diupload bukan gambar.',
-                    'mime_in' => 'Format gambar tidak valid. Hanya jpg, jpeg, png, gif yang diperbolehkan.'
-                ],
-            ],
-        ];
-
-        $this->validator->setRules($setRules);
-        $isValid = $this->validator->run($data);
-
-        if (!$isValid) { // jika validasi gagal
-            // Mengambil error dari validasi
-            $errors = $this->validator->getErrors();
-            // Mengembalikan response error dengan status 400
-            return ResponseJSONCollection::error($errors, 'Validasi gagal', ResponseInterface::HTTP_BAD_REQUEST);
-        }
-        // end validasi gambar
 
         // upload gambar
-        $path = './images/galeri/';
         $oldGambar = $this->modelGaleri->find($id)['gambar'];
-        if ($gambar) {
+        $path = './images/galeri/';
+        if (isset($data['gambar'])) {
             $path = './images/galeri/';
-            if (!empty($oldGambar) && file_exists($path . $oldGambar)) {
-                unlink($path . $oldGambar);
-            }
-            $fileName = UploadFileLibrary::uploadImage($gambar, $path);
+            UploadFileLibrary::deleteFile($path, $oldGambar);
+            $fileName = UploadFileLibrary::uploadImageBase64($data['gambar'], $path);
         };
 
         $data = [
@@ -242,7 +192,9 @@ class GaleriController extends BaseController
         try {
             $gambar = $this->modelGaleri->find($id)['gambar'];
             $path = './images/galeri/';
-            unlink($path . $gambar);
+            if (!empty($gambar) && file_exists($path . $gambar)) {
+                unlink($path . $gambar);
+            }
 
             $this->modelGaleri->delete($id);
             return ResponseJSONCollection::success([], 'Data berhasil dihapus.', ResponseInterface::HTTP_OK);
