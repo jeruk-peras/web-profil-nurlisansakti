@@ -19,14 +19,18 @@ $routes->group('/', function ($routes) {
 
     $routes->get('/artikel', 'PagesController::artikel');
     $routes->get('/artikel/(:any)', 'PagesController::artikel_detail/$1');
-    
+
     $routes->get('/page/(:any)', 'PagesController::halaman_detail/$1');
-    
+
     $routes->get('/karir', 'PagesController::karir');
     $routes->get('/karir/(:any)', 'PagesController::karir_detail/$1');
     $routes->post('/karir/(:any)', 'Administrator\KarirController::apply/$1');
 
     $routes->get('/kontak', 'PagesController::kontak');
+
+    $routes->get('/login', 'AccountController::loginPage');
+    $routes->post('/login', 'AccountController::validLogin');
+    $routes->get('/logout', 'AccountController::logout');
 });
 
 // api
@@ -49,6 +53,7 @@ $routes->group('render', function ($routes) {
     $routes->get('artikel', 'Serverside\RenderController::artikel');
     $routes->get('halaman', 'Serverside\RenderController::halaman');
     $routes->get('karir', 'Serverside\RenderController::karir');
+    $routes->get('user', 'Serverside\RenderController::user');
 });
 
 // datatables
@@ -64,10 +69,10 @@ $routes->group('adm', function ($routes) {
         $routes->get('/', 'Administrator\MenuController::index');
         $routes->post('/', 'Administrator\MenuController::save');
         $routes->post('order-data', 'Administrator\MenuController::orderData');
-        
+
         $routes->get('(:num)/edit', 'Administrator\MenuController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\MenuController::update/$1');
-        
+
         $routes->get('(:num)/submenu', 'Administrator\MenuController::submenu/$1');
         $routes->post('(:num)/submenu', 'Administrator\MenuController::save/$1');
 
@@ -77,13 +82,13 @@ $routes->group('adm', function ($routes) {
     // Halaman routes
     $routes->group('halaman', function ($routes) {
         $routes->get('/', 'Administrator\HalamanController::index');
-        
+
         $routes->get('add', 'Administrator\HalamanController::add');
         $routes->post('add', 'Administrator\HalamanController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\HalamanController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\HalamanController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\HalamanController::delete/$1');
     });
 
@@ -91,10 +96,10 @@ $routes->group('adm', function ($routes) {
     $routes->group('slider', function ($routes) {
         $routes->get('/', 'Administrator\SliderController::index');
         $routes->post('/', 'Administrator\SliderController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\SliderController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\SliderController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\SliderController::delete/$1');
     });
 
@@ -102,23 +107,23 @@ $routes->group('adm', function ($routes) {
     $routes->group('service', function ($routes) {
         $routes->get('/', 'Administrator\ServiceController::index');
         $routes->post('/', 'Administrator\ServiceController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\ServiceController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\ServiceController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\ServiceController::delete/$1');
     });
 
     // bisnis routes
     $routes->group('bisnis-produk', function ($routes) {
         $routes->get('/', 'Administrator\BisnisprodukController::index');
-        
+
         $routes->get('add', 'Administrator\BisnisprodukController::add');
         $routes->post('add', 'Administrator\BisnisprodukController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\BisnisprodukController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\BisnisprodukController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\BisnisprodukController::delete/$1');
     });
 
@@ -126,12 +131,12 @@ $routes->group('adm', function ($routes) {
     $routes->group('faq', function ($routes) {
         $routes->get('/', 'Administrator\FAQController::index');
         $routes->post('/', 'Administrator\FAQController::save');
-        
+
         $routes->get('add', 'Administrator\FAQController::add');
-        
+
         $routes->get('(:num)/edit', 'Administrator\FAQController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\FAQController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\FAQController::delete/$1');
     });
 
@@ -139,10 +144,10 @@ $routes->group('adm', function ($routes) {
     $routes->group('partner', function ($routes) {
         $routes->get('/', 'Administrator\PartnerController::index');
         $routes->post('/', 'Administrator\PartnerController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\PartnerController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\PartnerController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\PartnerController::delete/$1');
     });
 
@@ -151,32 +156,32 @@ $routes->group('adm', function ($routes) {
         // galeri foto
         $routes->get('/', 'Administrator\GaleriController::index');
         $routes->post('/', 'Administrator\GaleriController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\GaleriController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\GaleriController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\GaleriController::delete/$1');
 
         // kategori galeri
         $routes->get('kategori', 'Administrator\GaleriController::kategori');
         $routes->post('kategori', 'Administrator\GaleriController::saveKategori');
-        
+
         $routes->get('(:num)/edit-kategori', 'Administrator\GaleriController::editKategori/$1');
         $routes->post('(:num)/edit-kategori', 'Administrator\GaleriController::updateKategori/$1');
-        
+
         $routes->post('(:num)/delete-kategori', 'Administrator\GaleriController::deleteKategori/$1');
     });
 
     // artikel routes
     $routes->group('artikel', function ($routes) {
         $routes->get('/', 'Administrator\ArtikelController::index');
-        
+
         $routes->get('add', 'Administrator\ArtikelController::add');
         $routes->post('add', 'Administrator\ArtikelController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\ArtikelController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\ArtikelController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\ArtikelController::delete/$1');
     });
 
@@ -184,17 +189,30 @@ $routes->group('adm', function ($routes) {
     $routes->group('karir', function ($routes) {
         $routes->get('/', 'Administrator\KarirController::index');
         $routes->get('(:num)/data', 'Administrator\KarirController::dataKarirApply/$1');
-        
+
         $routes->get('add', 'Administrator\KarirController::add');
         $routes->post('add', 'Administrator\KarirController::save');
-        
+
         $routes->get('(:num)/edit', 'Administrator\KarirController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\KarirController::update/$1');
-        
+
         $routes->post('(:num)/delete', 'Administrator\KarirController::delete/$1');
 
         $routes->get('(:num)/detail-data', 'Administrator\KarirController::detailData/$1');
         $routes->post('(:num)/delete-data', 'Administrator\KarirController::deleteData/$1');
+    });
+
+    // User routes
+    $routes->group('user', function ($routes) {
+        $routes->get('/', 'Administrator\UserController::index');
+        $routes->post('/', 'Administrator\UserController::save');
+
+        $routes->get('(:num)/edit', 'Administrator\UserController::edit/$1');
+        $routes->post('(:num)/edit', 'Administrator\UserController::update/$1');
+
+        $routes->post('(:num)/delete', 'Administrator\UserController::delete/$1');
+
+        $routes->post('(:num)/edit-password', 'Administrator\UserController::update_pass/$1');
     });
 
     // Kontak routes

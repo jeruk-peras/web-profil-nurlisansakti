@@ -76,7 +76,7 @@
         </li>
 
         <li>
-            <a href="javascript:;">
+            <a href="<?= base_url('adm/user'); ?>">
                 <div class="parent-icon"><i class="bx bx-user-circle"></i></div>
                 <div class="menu-title">Manajemen User</div>
             </a>
