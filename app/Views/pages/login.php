@@ -12,6 +12,8 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="assets/css/app.css" rel="stylesheet">
+    <link href="assets/css/icons.css" rel="stylesheet">
+
     <title>Login - Administrator WEB PROFIL</title>
 </head>
 
@@ -40,8 +42,10 @@
                                                 <div class="invalid-feedback" id="error_username"></div>
                                             </div>
                                             <div class="col-12">
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password">
-                                                <div class="invalid-feedback" id="error_password"></div>
+                                                <div class="input-group" id="show_hide_password">
+													<input type="password" name="password" class="form-control border-end-0" placeholder="Masukan Password">
+                                                    <a href="javascript:;" class="input-group-text bg-transparent"><i class="bx bx-hide"></i></a>
+												</div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">

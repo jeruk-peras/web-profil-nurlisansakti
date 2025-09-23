@@ -62,7 +62,7 @@ $routes->group('datatables', function ($routes) {
 });
 
 // administrator
-$routes->group('adm', function ($routes) {
+$routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
 
     // menu routes
     $routes->group('menu', function ($routes) {
