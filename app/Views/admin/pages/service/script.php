@@ -1,14 +1,91 @@
 <script>
-    // preview image
-    $('#gambar').change(function() {
-        const file = this.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(event) {
-                $('#image').attr('src', event.target.result);
-            }
-            reader.readAsDataURL(file);
+    // inisialisasi croppie
+    $image_crop = $("#image_demo").croppie({
+        enableExif: true,
+        viewport: {
+            width: 140, // contoh: 1.5 x 400
+            height: 140, // jadinya 1.5 : 1
+            type: "circle", // atau "circle"
+        },
+        boundary: {
+            width: 150,
+            height: 150,
+        },
+    });
+
+    $("#gambar").on("change", function() {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            $image_crop
+                .croppie("bind", {
+                    url: event.target.result,
+                })
+                .then(function() {
+                    console.log("jQuery bind complete");
+                });
+        };
+        reader.readAsDataURL(this.files[0]);
+        $("#image_demo").removeClass("d-none");
+        $('#preview').addClass('d-none')
+    });
+
+    $("#cropButton").click(async function(event) {
+        var url = $('#form-data').attr('action');
+
+        // kalau tidak ada file baru di #gambar
+        if ($("#gambar")[0].files.length === 0) {
+            // langsung submit form tanpa crop
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: {
+                    <?= csrf_token() ?>: '<?= csrf_hash() ?>',
+                    konten: $('#konten').val(),
+                    service: $('#service').val(),
+                    // gambar tidak dikirim → backend pakai gambar lama
+                },
+                success: async function(response) {
+                    alertMesage(response.status, response.message);
+                    await FetchSlider();
+                    refreshTooltips();
+                    $("#image_demo").addClass("d-none");
+                    $('#form-data-modal').modal('hide');
+                    $('#form-data').attr('action', '');
+                },
+            });
+            return; // stop biar tidak lanjut ke croppie
         }
+
+        $image_crop
+            .croppie("result", {
+                type: "canvas",
+                size: {
+                    width: 100,
+                    height: 100
+                }, // tetap rasio 1.5:1 tapi lebih tajam
+                format: "png", // bisa "jpeg" atau "webp"
+                quality: 1 // max quality
+            })
+            .then(async function(response) {
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {
+                        <?= csrf_token() ?>: '<?= csrf_hash() ?>',
+                        konten: $('#konten').val(),
+                        service: $('#service').val(),
+                        gambar: response
+                    },
+                    success: async function(response) {
+                        alertMesage(response.status, response.message);
+                        await FetchSlider();
+                        refreshTooltips();
+                        $("#image_demo").addClass("d-none");
+                        $('#form-data-modal').modal('hide');
+                        $('#form-data').attr('action', '');
+                    },
+                });
+            });
     });
 
     $(document).ready(async function() {
@@ -35,42 +112,6 @@
         }
     }
 
-    // hendle save data
-    $('#form-data').submit(async function(e) {
-        e.preventDefault();
-        var url, formData;
-        url = $(this).attr('action');
-        var form = $(this)[0];
-        formData = new FormData(form);
-        $('#btn-simpan').attr('disabled', true).text('Menyimpan...');
-
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: async function(response) {
-                $('#form-data-modal').modal('hide');
-                await FetchSlider();
-                refreshTooltips();
-                $('#btn-simpan').attr('disabled', false).text('Simpan data');
-                alertMesage(response.status, response.message);
-            },
-            error: function(xhr, status, error) {
-                var response = JSON.parse(xhr.responseText);
-                $('#form-data .form-control').removeClass('is-invalid');
-                $('.invalid-feedback').text('');
-                $('#btn-simpan').attr('disabled', false).text('Simpan data');
-                $.each(response.data, function(key, value) {
-                    $('#' + key).addClass('is-invalid');
-                    $('#invalid_' + key).text(value).show();
-                });
-                alertMesage(response.status, response.message);
-            }
-        })
-    })
-
     // katika modal di tutup
     $('#form-data-modal').on('hidden.bs.modal', function() {
         $('#form-data').attr('action', '');
@@ -94,7 +135,8 @@
 
                 $('#service').val(response.data.service);
                 $('#konten').val(response.data.konten);
-                $('#image').attr('src', response.data.gambar);
+                $('#preview').removeClass('d-none');
+                $('#preview').attr('src', response.data.gambar);
             },
             error: function(xhr, status, error) {
                 var response = JSON.parse(xhr.responseText);
