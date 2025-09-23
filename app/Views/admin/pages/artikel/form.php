@@ -1,7 +1,7 @@
 <?= $this->extend('admin/layout/index'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css" />
 <div class="page-content">
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-2">
         <div class="breadcrumb-title pe-3">Artikel</div>
@@ -35,7 +35,8 @@
                         <div class="invalid-feedback" id="invalid_gambar"></div>
                     </div>
                     <div class="col-md-9 text-center">
-                        <img id="image" src="<?= $data['gambar'] ?? ''; ?>" style="max-width: 100%;">
+                        <div class="d-none" id="image_demo" style="width: 350px; margin-top: 30px;"></div>
+                        <img class="<?= $data['gambar'] ?? 'd-none'; ?>" id="preview" src="<?= $data['gambar'] ?? ''; ?>" style="max-width: 100%;">
                     </div>
                     <div class="col-md-6">
                         <label for="penulis" class="form-label fw-medium required">Penulis</label>
@@ -71,117 +72,87 @@
 </div>
 <?= $this->include('admin/layout/tinymce'); ?>
 <script>
-    $('#form-data').submit(function(e) {
-        e.preventDefault();
+    // inisialisasi croppie
+    $image_crop = $("#image_demo").croppie({
+        enableExif: true,
+        viewport: {
+            width: 600, // contoh: 1.5 x 400
+            height: 400, // jadinya 1.5 : 1
+            type: "square", // atau "circle"
+        },
+        boundary: {
+            width: 700,
+            height: 500,
+        },
     });
 
-    let cropper;
-
-    $('#form-data-modal').on('hidden.bs.modal', function() {
-        if (cropper) {
-            cropper.destroy();
-        }
-
-    });
-    // set cropper saat input file berubah
-    $('#gambar').on('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const url = URL.createObjectURL(file);
-            $('#image').attr('src', url);
-
-            if (cropper) {
-                cropper.destroy();
-            }
-
-            cropper = new Cropper(document.getElementById('image'), {
-                aspectRatio: 1.5 / 1,
-                viewMode: 1,
-                dragMode: 'none',
-                zoomable: true,
-                scalable: true,
-                rotatable: false,
-                cropBoxResizable: false,
-                cropBoxMovable: true
-            });
-        }
-    });
-
-    // tombol crop dan upload
-    $('#cropButton').on('click', function() {
-        if (!cropper) {
-            if (typeof tinymce !== 'undefined') {
-                tinymce.triggerSave();
-            }
-            const form = $('#form-data');
-            const data = form.serializeArray();
-            const url = form.attr('action');
-            $.ajax({
-                url: url,
-                method: 'POST',
-                data: data,
-                success: async function(response) {
-                    alertMesage(response.status, response.message);
-                    window.location.href = "/adm/artikel";
-                },
-                error: function(xhr, status, error) {
-                    var response = JSON.parse(xhr.responseText);
-                    $.each(response.data, function(key, value) {
-                        $('#' + key).addClass('is-invalid');
-                        $('#invalid_' + key).text(value).show();
-                    });
-                    alertMesage(response.status, response.message);
-                }
-            });
-
-            return;
+    $("#gambar").on("change", function() {
+        var reader = new FileReader();
+        reader.onload = function(event) {
+            $image_crop
+                .croppie("bind", {
+                    url: event.target.result,
+                })
+                .then(function() {
+                    console.log("jQuery bind complete");
+                });
         };
+        reader.readAsDataURL(this.files[0]);
+        $("#image_demo").removeClass("d-none");
+        $('#preview').addClass('d-none')
+    });
 
-        const imageData = cropper.getImageData();
-        const cropBoxData = cropper.getCropBoxData();
+    $("#cropButton").click(async function(event) {
 
-        // Hitung skala asli terhadap canvas
-        const scaleX = imageData.naturalWidth / imageData.width;
-        const scaleY = imageData.naturalHeight / imageData.height;
+        if (typeof tinymce !== 'undefined') {
+            tinymce.triggerSave();
+        }
 
-        // Ukuran asli hasil crop
-        const actualWidth = cropBoxData.width * scaleX;
-        const actualHeight = cropBoxData.height * scaleY;
+        var url = $('#form-data').attr('action');
+        var formData = $('#form-data').serializeArray();
 
-        const canvas = cropper.getCroppedCanvas({
-            width: actualWidth,
-            height: actualHeight
-        });
-
-        canvas.toBlob(function(blob) {
-            if (typeof tinymce !== 'undefined') {
-                tinymce.triggerSave();
-            }
-
-            const url = $('#form-data').attr('action');
-            const formData = new FormData($('#form-data')[0]);
-            formData.append('gambar', blob, 'cropped-image.png');
-
+        // kalau tidak ada file baru di #gambar
+        if ($("#gambar")[0].files.length === 0) {
+            // langsung submit form tanpa crop
             $.ajax({
                 url: url,
-                method: 'POST',
+                type: "POST",
                 data: formData,
-                processData: false,
-                contentType: false,
                 success: async function(response) {
                     alertMesage(response.status, response.message);
                     window.location.href = "/adm/artikel";
                 },
-                error: function(xhr, status, error) {
-                    var response = JSON.parse(xhr.responseText);
-                    $.each(response.data, function(key, value) {
-                        $('#' + key).addClass('is-invalid');
-                        $('#invalid_' + key).text(value).show();
-                    });
-                    alertMesage(response.status, response.message);
-                }
             });
-        });
+            return; // stop biar tidak lanjut ke croppie
+        }
+
+        $image_crop
+            .croppie("result", {
+                type: "canvas",
+                size: {
+                    width: 1500,
+                    height: 1000
+                }, // tetap rasio 1.5:1 tapi lebih tajam
+                format: "png", // bisa "jpeg" atau "webp"
+                quality: 1 // max quality
+            })
+            .then(async function(response) {
+
+                formData.push({
+                    name: 'gambar',
+                    value: response
+                });
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: formData,
+                    success: async function(response) {
+                        alertMesage(response.status, response.message);
+                        window.location.href = "/adm/artikel";
+                    },
+                });
+            });
     });
 </script>
 <?= $this->endSection(); ?>

@@ -134,7 +134,7 @@ class BisnisprodukController extends BaseController
         try {
             $gambar = $this->modelBisnisProduk->find($id)['gambar'];
             $path = './images/bisnis_produk/';
-            unlink($path . $gambar);
+            UploadFileLibrary::deleteFile($path, $gambar);
 
             $this->modelBisnisProduk->delete($id);
             return ResponseJSONCollection::success([], 'Data berhasil dihapus.', ResponseInterface::HTTP_OK);
