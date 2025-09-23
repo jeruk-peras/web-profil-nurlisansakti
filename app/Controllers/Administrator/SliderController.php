@@ -108,7 +108,7 @@ class SliderController extends BaseController
         try {
             $gambar = $this->modelSlider->find($id)['gambar'];
             $path = './images/slider/';
-            unlink($path . $gambar);
+            UploadFileLibrary::deleteFile($path, $gambar);
 
             $this->modelSlider->delete($id);
             return ResponseJSONCollection::success([], 'Data berhasil dihapus.', ResponseInterface::HTTP_OK);

@@ -43,34 +43,10 @@ class BisnisprodukController extends BaseController
     public function save()
     {
         $data = $this->request->getPost(); // mengambil post data
-        $gambar = $this->request->getFile('gambar');
-
-        // validasi gambar
-        $setRules = [
-            'gambar' => [
-                'rules'  => 'max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar maksimal 2MB.',
-                    'is_image' => 'File yang diupload bukan gambar.',
-                    'mime_in' => 'Format gambar tidak valid. Hanya jpg, jpeg, png, gif yang diperbolehkan.'
-                ],
-            ],
-        ];
-
-        $this->validator->setRules($setRules);
-        $isValid = $this->validator->run($data);
-
-        if (!$isValid) { // jika validasi gagal
-            // Mengambil error dari validasi
-            $errors = $this->validator->getErrors();
-            // Mengembalikan response error dengan status 400
-            return ResponseJSONCollection::error($errors, 'Validasi gagal', ResponseInterface::HTTP_BAD_REQUEST);
-        }
-        // end validasi gambar
 
         // upload gambar
         $path = './images/bisnis_produk/';
-        if ($gambar) $fileName = UploadFileLibrary::uploadImage($gambar, $path);
+        $fileName = UploadFileLibrary::uploadImageBase64($data['gambar'], $path);
 
         $data = [
             'bisnis_produk' => $data['bisnis_produk'],
@@ -103,14 +79,14 @@ class BisnisprodukController extends BaseController
             if (!$data) {
                 return PageNotFoundException::forPageNotFound('Data tidak ditemukan.');
             }
-            
+
             $data['gambar'] = '/images/bisnis_produk/' . $data['gambar'];
 
             return view('admin/pages/bisnis_produk/form', [
                 'title' => $this->title,
                 'data' => $data
             ]);
-            
+
             // return ResponseJSONCollection::success($data, 'Data ditemukan.', ResponseInterface::HTTP_OK);
         } catch (\Throwable $e) {
             return PageNotFoundException::forPageNotFound($e->getMessage());
@@ -121,39 +97,13 @@ class BisnisprodukController extends BaseController
     public function update(int $id)
     {
         $data = $this->request->getPost(); // mengambil post data
-        $gambar = $this->request->getFile('gambar');
-
-        // validasi gambar
-        $setRules = [
-            'gambar' => [
-                'rules'  => 'permit_empty|max_size[gambar,2048]|is_image[gambar]|mime_in[gambar,image/jpg,image/jpeg,image/png,image/gif]',
-                'errors' => [
-                    'max_size' => 'Ukuran gambar maksimal 2MB.',
-                    'is_image' => 'File yang diupload bukan gambar.',
-                    'mime_in' => 'Format gambar tidak valid. Hanya jpg, jpeg, png, gif yang diperbolehkan.'
-                ],
-            ],
-        ];
-
-        $this->validator->setRules($setRules);
-        $isValid = $this->validator->run($data);
-
-        if (!$isValid) { // jika validasi gagal
-            // Mengambil error dari validasi
-            $errors = $this->validator->getErrors();
-            // Mengembalikan response error dengan status 400
-            return ResponseJSONCollection::error($errors, 'Validasi gagal', ResponseInterface::HTTP_BAD_REQUEST);
-        }
-        // end validasi gambar
 
         // upload gambar
         $path = './images/bisnis_produk/';
         $oldGambar = $this->modelBisnisProduk->find($id)['gambar'];
-        if (isset($_FILES['gambar']['name']) && $gambar) {
-            if (!empty($oldGambar) && file_exists($path . $oldGambar)) {
-                unlink($path . $oldGambar);
-            }
-            $fileName = UploadFileLibrary::uploadImage($gambar, $path);
+        if (isset($data['gambar'])) {
+            UploadFileLibrary::deleteFile($path, $oldGambar);
+            $fileName = UploadFileLibrary::uploadImageBase64($data['gambar'], $path);
         };
 
         $data = [
