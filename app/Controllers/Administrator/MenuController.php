@@ -136,4 +136,26 @@ class MenuController extends BaseController
             return ResponseJSONCollection::error([$e], 'Error', ResponseInterface::HTTP_OK);
         }
     }
+
+    public function publish(int $id)
+    {
+        try {
+            $data = $this->modelMenu->find($id); // mengambil data
+            // jika data tidak ditemukan
+            if (!$data) {
+                return ResponseJSONCollection::error([], 'Data tidak ditemukan.', ResponseInterface::HTTP_BAD_REQUEST);
+            }
+
+            $update = $this->modelMenu->update($id, ['publish' => $data['publish'] ? 0 : 1]); // update data
+            // jika update gagal maka
+            if (!$update) {
+                $errors = $this->modelMenu->errors(); // mengambil data error
+                return ResponseJSONCollection::error($errors, 'Data tidak valid.', ResponseInterface::HTTP_BAD_REQUEST);
+            }
+
+            return ResponseJSONCollection::success([], 'Data berhasil diubah.', ResponseInterface::HTTP_OK);
+        } catch (\Throwable $e) {
+            return ResponseJSONCollection::error([$e->getMessage()], 'Terjadi kesalahan server.', ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

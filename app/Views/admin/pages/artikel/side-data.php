@@ -11,8 +11,15 @@
                 </p>
             </div>
             <div class="card-body">
-                <a href="/adm/artikel/<?= $row['id'] ?>/edit" class="me-2 btn btn-sm btn-primary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Edit Data"><i class="bx bx-pencil me-0"></i></a>
-                <a href="/adm/artikel/<?= $row['id'] ?>/delete" class="me-2 btn btn-sm btn-danger btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Hapus Data"><i class="bx bx-trash me-0"></i></a>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="/adm/artikel/<?= $row['id'] ?>/edit" class="me-2 btn btn-sm btn-primary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Edit Data"><i class="bx bx-pencil me-0"></i></a>
+                        <a href="/adm/artikel/<?= $row['id'] ?>/delete" class="me-2 btn btn-sm btn-danger btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Hapus Data"><i class="bx bx-trash me-0"></i></a>
+                    </div>
+                    <div>
+                        <a href="/adm/artikel/<?= $row['id']; ?>/publish" class="me-2 badge <?= $row['publish'] ? 'bg-primary' : 'bg-warning'; ?> btn-publish" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="<?= $row['publish'] ? 'hide' : 'Publish'; ?>"><?= $row['publish'] ? 'publish' : 'hide'; ?></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

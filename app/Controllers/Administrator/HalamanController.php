@@ -116,4 +116,26 @@ class HalamanController extends BaseController
             return ResponseJSONCollection::error([$e->getMessage()], 'Data tidak bisa dihapus.', ResponseInterface::HTTP_BAD_REQUEST);
         }
     }
+
+    public function publish(int $id)
+    {
+        try {
+            $data = $this->modelHalaman->find($id); // mengambil data
+            // jika data tidak ditemukan
+            if (!$data) {
+                return ResponseJSONCollection::error([], 'Data tidak ditemukan.', ResponseInterface::HTTP_BAD_REQUEST);
+            }
+
+            $update = $this->modelHalaman->update($id, ['publish' => $data['publish'] ? 0 : 1]); // update data
+            // jika update gagal maka
+            if (!$update) {
+                $errors = $this->modelHalaman->errors(); // mengambil data error
+                return ResponseJSONCollection::error($errors, 'Data tidak valid.', ResponseInterface::HTTP_BAD_REQUEST);
+            }
+
+            return ResponseJSONCollection::success([], 'Data berhasil diubah.', ResponseInterface::HTTP_OK);
+        } catch (\Throwable $e) {
+            return ResponseJSONCollection::error([$e->getMessage()], 'Terjadi kesalahan server.', ResponseInterface::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }

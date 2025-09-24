@@ -177,4 +177,24 @@
             }
         });
     })
+
+    // hendle publish button
+    $(document).on('click', '#render-data .col .card-body a.btn-publish', async function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: async function(response) {
+                await FetchSlider();
+                refreshTooltips();
+                alertMesage(response.status, response.message);
+            },
+            error: function(xhr, status, error) {
+                var response = JSON.parse(xhr.responseText);
+                alertMesage(response.status, response.message);
+            }
+        });
+    })
 </script>

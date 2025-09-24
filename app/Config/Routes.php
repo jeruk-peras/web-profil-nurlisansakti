@@ -76,6 +76,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
         $routes->get('(:num)/submenu', 'Administrator\MenuController::submenu/$1');
         $routes->post('(:num)/submenu', 'Administrator\MenuController::save/$1');
 
+        $routes->get('(:num)/publish', 'Administrator\MenuController::publish/$1');
+
         $routes->post('(:num)/delete', 'Administrator\MenuController::delete/$1');
     });
 
@@ -89,6 +91,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
         $routes->get('(:num)/edit', 'Administrator\HalamanController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\HalamanController::update/$1');
 
+        $routes->get('(:num)/publish', 'Administrator\HalamanController::publish/$1');
+
         $routes->post('(:num)/delete', 'Administrator\HalamanController::delete/$1');
     });
 
@@ -101,6 +105,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
         $routes->post('(:num)/edit', 'Administrator\SliderController::update/$1');
 
         $routes->post('(:num)/delete', 'Administrator\SliderController::delete/$1');
+
+        $routes->get('(:num)/publish', 'Administrator\SliderController::publish/$1');
     });
 
     // Service routes
@@ -110,6 +116,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
 
         $routes->get('(:num)/edit', 'Administrator\ServiceController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\ServiceController::update/$1');
+
+        $routes->get('(:num)/publish', 'Administrator\ServiceController::publish/$1');
 
         $routes->post('(:num)/delete', 'Administrator\ServiceController::delete/$1');
     });
@@ -123,6 +131,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
 
         $routes->get('(:num)/edit', 'Administrator\BisnisprodukController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\BisnisprodukController::update/$1');
+
+        $routes->get('(:num)/publish', 'Administrator\BisnisprodukController::publish/$1');
 
         $routes->post('(:num)/delete', 'Administrator\BisnisprodukController::delete/$1');
     });
@@ -160,6 +170,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
         $routes->get('(:num)/edit', 'Administrator\GaleriController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\GaleriController::update/$1');
 
+        $routes->get('(:num)/publish', 'Administrator\GaleriController::publish/$1');
+
         $routes->post('(:num)/delete', 'Administrator\GaleriController::delete/$1');
 
         // kategori galeri
@@ -182,6 +194,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
         $routes->get('(:num)/edit', 'Administrator\ArtikelController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\ArtikelController::update/$1');
 
+        $routes->get('(:num)/publish', 'Administrator\ArtikelController::publish/$1');
+
         $routes->post('(:num)/delete', 'Administrator\ArtikelController::delete/$1');
     });
 
@@ -195,6 +209,8 @@ $routes->group('adm', ['filter' => 'isLogin'], function ($routes) {
 
         $routes->get('(:num)/edit', 'Administrator\KarirController::edit/$1');
         $routes->post('(:num)/edit', 'Administrator\KarirController::update/$1');
+
+        $routes->get('(:num)/publish', 'Administrator\KarirController::publish/$1');
 
         $routes->post('(:num)/delete', 'Administrator\KarirController::delete/$1');
 

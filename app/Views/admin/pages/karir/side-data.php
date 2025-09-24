@@ -13,8 +13,8 @@
                     <a href="/adm/karir/<?= $row['id'] ?>/delete" class="me-2 btn btn-sm btn-danger btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Hapus Data"><i class="bx bx-trash me-0"></i></a>
                 </div>
                 <div class="col-auto">
+                    <a href="/adm/karir/<?= $row['id']; ?>/publish" class="me-2 badge <?= $row['publish'] ? 'bg-primary' : 'bg-warning'; ?> btn-publish" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="<?= $row['publish'] ? 'hide' : 'Publish'; ?>"><?= $row['publish'] ? 'publish' : 'hide'; ?></a>
                     <a href="/adm/karir/<?= $row['id'] ?>/data" class="me-2 btn btn-sm btn-primary btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Appy Data"><i class="bx bx-collection me-0"></i></a>
-                    <!-- <a href="/adm/karir/<?= $row['id'] ?>/delete" class="me-2 btn btn-sm btn-danger btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Hapus Data"><i class="bx bx-trash me-0"></i></a> -->
                 </div>
             </div>
         </div>

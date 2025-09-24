@@ -18,8 +18,10 @@
                     <a href="/adm/menu/<?= $row['id']; ?>/delete" class="me-2 btn btn-sm btn-danger btn-delete" data-id-produk="' + data + '" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Hapus Data"><i class="bx bx-trash me-0"></i></a>
                 </td>
                 <td><?= $row['nama_menu']; ?></td>
-                <td><?= ($row['url'] == 'parent' ? '<a href="/adm/menu/'.$row['id'].'/submenu" class="badge bg-primary">--parent--</a>' : ($row['url'] == 'link' ? '<a href="' . $row['link'] . '" class="badge bg-primary">--link--</a>' : $row['url'])); ?></td>
-                <td><?= $row['publish']; ?></td>
+                <td><?= ($row['url'] == 'parent' ? '<a href="/adm/menu/' . $row['id'] . '/submenu" class="badge bg-primary">--parent--</a>' : ($row['url'] == 'link' ? '<a href="' . $row['link'] . '" class="badge bg-primary">--link--</a>' : $row['url'])); ?></td>
+                <td>
+                    <a href="/adm/menu/<?= $row['id']; ?>/publish" class="me-2 badge <?= $row['publish'] ? 'bg-primary' : 'bg-warning'; ?> btn-publish" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="<?= $row['publish'] ? 'hide' : 'Publish'; ?>"><?= $row['publish'] ? 'publish' : 'hide'; ?></a>
+                </td>
             </tr>
         <?php endforeach;  ?>
     </tbody>

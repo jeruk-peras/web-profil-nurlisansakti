@@ -189,6 +189,26 @@
         });
     })
 
+    // hendle publish button
+    $(document).on('click', '#data-render tbody tr td a.btn-publish', async function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: async function(response) {
+                await FetchMenu();
+                initSortable();
+                alertMesage(response.status, response.message);
+            },
+            error: function(xhr, status, error) {
+                var response = JSON.parse(xhr.responseText);
+                alertMesage(response.status, response.message);
+            }
+        });
+    })
+
     // load url data
     async function FetchURL() {
         var url = $('#form-data').attr('data-parent');

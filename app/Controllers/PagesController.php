@@ -22,7 +22,11 @@ class PagesController extends BaseController
 
         $data['bisnis_produk'] = $this->db->table('bisnis_produk')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get()->getRowArray();
+        })->where('publish', 1)->get()->getRowArray();
+
+         if (!$data['bisnis_produk']) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
+        }
 
         $data['deskripsi'] = $data['bisnis_produk']['deskripsi'];
         $data['kata_kunci'] = $data['bisnis_produk']['kata_kunci'];
@@ -63,7 +67,7 @@ class PagesController extends BaseController
 
         $data['page'] = floor($pages);
 
-        $data['artikel'] = $this->db->table('artikel')->orderBy('created_at', 'DESC')->get($limit, $offset)->getResultArray();
+        $data['artikel'] = $this->db->table('artikel')->where('publish', 1)->orderBy('created_at', 'DESC')->get($limit, $offset)->getResultArray();
 
         if (!$data['artikel']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
@@ -80,7 +84,7 @@ class PagesController extends BaseController
 
         $data['artikel'] = $this->db->table('artikel')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get()->getRowArray();
+        })->where('publish', 1)->get()->getRowArray();
 
         if (!$data['artikel']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
@@ -97,7 +101,7 @@ class PagesController extends BaseController
         $data = [];
         $data['halaman'] = $this->db->table('halaman')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get()->getRowArray();
+        })->where('publish', 1)->get()->getRowArray();
 
         if (!$data['halaman']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
@@ -116,7 +120,7 @@ class PagesController extends BaseController
             'title' => 'Karir',
         ];
 
-        $data['karir'] = $this->db->table('karir')->orderBy('created_at', 'DESC')->get()->getResultArray();
+        $data['karir'] = $this->db->table('karir')->where('publish', 1)->orderBy('created_at', 'DESC')->get()->getResultArray();
 
         if (!$data['karir']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('karir tidak ditemukan');
@@ -133,7 +137,7 @@ class PagesController extends BaseController
 
         $data['karir'] = $this->db->table('karir')->when($slug, function ($query) use ($slug) {
             $query->where('slug', $slug);
-        })->get()->getRowArray();
+        })->where('publish', 1)->get()->getRowArray();
 
         if (!$data['karir']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('karir tidak ditemukan');

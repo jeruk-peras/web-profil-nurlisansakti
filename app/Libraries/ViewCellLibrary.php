@@ -18,8 +18,8 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'menu' => $this->modelMenu->where('level', 1)->orderBy('order', 'ASC')->findAll(),
-            'submenu' => $this->modelMenu->where('level', 2)->orderBy('order', 'ASC')->findAll(),
+            'menu' => $this->modelMenu->where('level', 1)->where('publish', 1)->orderBy('order', 'ASC')->findAll(),
+            'submenu' => $this->modelMenu->where('level', 2)->where('publish', 1)->orderBy('order', 'ASC')->findAll(),
         ];
 
         return view('viewcell/main-menu', $data);
@@ -29,7 +29,7 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'slider' => $this->db->table('slider')->get()->getResultArray()
+            'slider' => $this->db->table('slider')->where('publish', 1)->get()->getResultArray()
         ];
 
         return view('viewcell/slider', $data);
@@ -39,7 +39,7 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'service' => $this->db->table('service')->get()->getResultArray()
+            'service' => $this->db->table('service')->where('publish', 1)->get()->getResultArray()
         ];
 
         return view('viewcell/service', $data);
@@ -49,7 +49,7 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'bisnis_produk' => $this->db->table('bisnis_produk')->get()->getResultArray()
+            'bisnis_produk' => $this->db->table('bisnis_produk')->where('publish', 1)->get()->getResultArray()
         ];
 
         return view('viewcell/bisnis_produk', $data);
@@ -91,7 +91,7 @@ class ViewCellLibrary extends BaseController
 
         $data = [
             'kategori' => $this->db->table('kategori')->get()->getResultArray(),
-            'galeri' => $this->db->table('galeri')->get()->getResultArray()
+            'galeri' => $this->db->table('galeri')->where('publish', 1)->get()->getResultArray()
         ];
 
         return view('viewcell/galeri', $data);
@@ -101,7 +101,7 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'artikel' => $this->db->table('artikel')->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
+            'artikel' => $this->db->table('artikel')->where('publish', 1)->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
             'col' => $col
         ];
 
@@ -112,7 +112,7 @@ class ViewCellLibrary extends BaseController
     {
 
         $data = [
-            'artikel' => $this->db->table('artikel')->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
+            'artikel' => $this->db->table('artikel')->where('publish', 1)->orderBy('created_at', 'DESC')->limit($limit)->get()->getResultArray(),
         ];
 
         return view('viewcell/aside_artikel', $data);
