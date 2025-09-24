@@ -57,9 +57,13 @@
                             <input type="text" name="username" id="username" class="form-control">
                             <div class="invalid-feedback" id="invalid_username"></div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <label for="role" class="form-label fw-medium required">Role</label>
-                            <input type="text" name="role" id="role" class="form-control">
+                            <select name="role" class="form-select" id="role">
+                                <option value="" selected disabled>-- Pilih Role --</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                            </select>
                             <div class="invalid-feedback" id="invalid_role"></div>
                         </div>
                     </div>

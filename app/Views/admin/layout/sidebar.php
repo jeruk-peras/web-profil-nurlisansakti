@@ -75,11 +75,13 @@
             </a>
         </li>
 
-        <li>
-            <a href="<?= base_url('adm/user'); ?>">
-                <div class="parent-icon"><i class="bx bx-user-circle"></i></div>
-                <div class="menu-title">Manajemen User</div>
-            </a>
-        </li>
+        <?php if (session('role') == 'admin'): ?>
+            <li>
+                <a href="<?= base_url('adm/user'); ?>">
+                    <div class="parent-icon"><i class="bx bx-user-circle"></i></div>
+                    <div class="menu-title">Manajemen User</div>
+                </a>
+            </li>
+        <?php endif; ?>
         <!--end navigation-->
 </div>
