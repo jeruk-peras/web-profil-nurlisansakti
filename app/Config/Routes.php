@@ -28,6 +28,9 @@ $routes->group('/', function ($routes) {
 
     $routes->get('/kontak', 'PagesController::kontak');
 
+    $routes->get('/tracking', 'PagesController::tracking');
+    $routes->post('/tracking', 'PagesController::getTrackingData');
+
     $routes->get('/login', 'AccountController::loginPage');
     $routes->post('/login', 'AccountController::validLogin');
     $routes->get('/logout', 'AccountController::logout');

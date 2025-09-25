@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Libraries\ResponseJSONCollection;
+
 class PagesController extends BaseController
 {
     private $title = 'Asuransi';
@@ -24,7 +26,7 @@ class PagesController extends BaseController
             $query->where('slug', $slug);
         })->where('publish', 1)->get()->getRowArray();
 
-         if (!$data['bisnis_produk']) {
+        if (!$data['bisnis_produk']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Artikel tidak ditemukan');
         }
 
@@ -157,4 +159,43 @@ class PagesController extends BaseController
 
         return view('/pages/kontak', $data);
     }
+
+    public function tracking(): string
+    {
+        $data = [
+            'title' => 'Tracking',
+        ];
+
+        return view('/pages/tracking', $data);
+    }
+
+    public function getTrackingData()
+    {
+        $no_spp = $this->request->getPost('no_spp');
+        $no_polisi = $this->request->getPost('no_polisi');
+        
+        $client = \Config\Services::curlrequest();
+        $urlapi = env('TRAKING_URL');
+
+        $body = [
+            'nomor_spp' => $no_spp,
+            'nomor_polisi' => $no_polisi
+        ];
+
+        $response = $client->request("POST", $urlapi, [
+            'body' => json_encode($body),
+            'headers' => [
+                'Content-Type'    => 'application/json',
+                'Accept'          => 'application/json',
+            ]
+        ]);
+
+        $data = json_decode($response->getBody());
+
+        return ResponseJSONCollection::success(['html' => view('/pages/tracking_result', ['data' => $data->data]), 'data' => $data->data]);
+
+        return $this->response->setJSON($data);
+    }
+
+
 }
