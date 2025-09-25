@@ -72,7 +72,8 @@
             },
             error: function(xhr, status, error) {
                 var response = JSON.parse(xhr.responseText);
-                alert(response.status, response.message);
+                $('#tracking-result').html('<div class="alert alert-danger text-center">' + response.message + '</div>').show();
+                $('html, body').animate({ scrollTop: $("#tracking-result").offset().top  }, 500);
             }
         });
     })

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\ResponseJSONCollection;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class PagesController extends BaseController
 {
@@ -187,15 +188,16 @@ class PagesController extends BaseController
             'headers' => [
                 'Content-Type'    => 'application/json',
                 'Accept'          => 'application/json',
-            ]
+            ],
+            'http_errors' => false,
         ]);
-
+        
         $data = json_decode($response->getBody());
 
-        return ResponseJSONCollection::success(['html' => view('/pages/tracking_result', ['data' => $data->data]), 'data' => $data->data]);
-
-        return $this->response->setJSON($data);
+        if ($data && $data->status == '200' && $data->data) {
+            return ResponseJSONCollection::success(['html' => view('/pages/tracking_result', ['data' => $data->data]), 'data' => $data->data]);
+        } else {
+            return ResponseJSONCollection::error([], 'Data unit tidak ditemukan', ResponseInterface::HTTP_BAD_REQUEST);
+        }
     }
-
-
 }
