@@ -63,6 +63,10 @@ class ApiController extends BaseController
 
         $data = array_merge($data, [
             [
+                'name' => '/tracking',
+                'url'  => '/tracking'
+            ],
+            [
                 'name' => '/beranda',
                 'url'  => '/beranda'
             ],
